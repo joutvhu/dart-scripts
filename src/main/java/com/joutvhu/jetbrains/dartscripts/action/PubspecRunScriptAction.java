@@ -38,7 +38,7 @@ public class PubspecRunScriptAction extends AnAction {
         PsiFile file = e.getData(CommonDataKeys.PSI_FILE);
         YAMLKeyValue element = getElement(e);
         if (project != null && file instanceof YAMLFile && element != null) {
-            RunConfiguration runConfiguration = PubspecTerminalHelper.runScript(
+            PubspecTerminalHelper.runScript(
                     this.getExecutor(),
                     e.getData(CommonDataKeys.PROJECT),
                     element.getKeyText(),

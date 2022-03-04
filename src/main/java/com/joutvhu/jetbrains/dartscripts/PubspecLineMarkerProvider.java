@@ -6,8 +6,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.joutvhu.jetbrains.dartscripts.action.PubspecDebugScriptAction;
 import com.joutvhu.jetbrains.dartscripts.action.PubspecRunScriptAction;
+import com.joutvhu.jetbrains.dartscripts.util.DartBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.YAMLTokenTypes;
 import org.jetbrains.yaml.psi.YAMLDocument;
@@ -48,8 +48,7 @@ public class PubspecLineMarkerProvider extends RunLineMarkerContributor {
     private Info createMarkerInfo(YAMLKeyValue element) {
         String scriptName = element.getKeyText();
         return new Info(AllIcons.Actions.Execute, new AnAction[]{
-                new PubspecRunScriptAction(String.format("Run '%s'", scriptName), "", AllIcons.Actions.Execute),
-                new PubspecDebugScriptAction(String.format("Debug '%s'", scriptName), "", AllIcons.Actions.StartDebugger)
+                new PubspecRunScriptAction(DartBundle.message("ds.action.name.run", scriptName), "", AllIcons.Actions.Execute)
         }, psiElement -> "");
     }
 }
