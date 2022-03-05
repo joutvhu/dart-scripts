@@ -5,10 +5,19 @@
 
     <description>
         <![CDATA[
+        <p>Support to run scripts in <b>pubspec.yaml</b> file with just one click.</p>
+        <br>
+        <img src="https://github.com/joutvhu/dart-scripts/raw/main/docs/images/pubspec-scripts-running.png" alt="Run script on pubspec.yaml" style="max-width: 100%;">
         ]]>
     </description>
 
-    <change-notes/>
+    <change-notes>
+        <![CDATA[
+        <a href="https://github.com/joutvhu/dart-scripts/blob/master/CHANGELOG.md">Changelog</a><br/>
+        <a href="https://github.com/joutvhu/dart-scripts/blob/master/README.md">Readme</a><br/>
+        <a href="https://github.com/joutvhu/dart-scripts/blob/master/LICENSE">License</a><br/>
+        ]]>
+    </change-notes>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
