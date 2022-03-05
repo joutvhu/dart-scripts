@@ -9,7 +9,7 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     steps:
@@ -37,15 +37,14 @@ jobs:
       - name: Build with Gradle
         run: gradle clean buildPlugin
 
-#      - name: Publish Plugin to Jetbrains
-#          if: ${{ steps.current_release.outputs.prerelease == 'false' && steps.current_release.outputs.draft == 'false' }}
-#          run: gradle publishPlugin
+      - name: Publish Plugin to Jetbrains
+        if: ${{ steps.current_release.outputs.draft == 'false' }}
+        run: gradle publishPlugin
 
-#      - name: Zip plugin
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: dart-scripts-${{ steps.current_release.outputs.tag_name }}
-#          path: /build/libs/**
+      - name: Get Plugin File
+        id: get_file
+        run: echo ::set-output name=plugin_file::$(find dart-scripts-*.zip)
+        working-directory: ./build/distributions
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
@@ -53,4 +52,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.current_release.outputs.upload_url }}
-          asset_path: /build/libs/**
+          asset_name: ${{ steps.get_file.outputs.plugin_file }}
+          asset_path: ./build/distributions/${{ steps.get_file.outputs.plugin_file }}
+          asset_content_type: application/zip

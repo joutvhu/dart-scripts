@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>com.joutvhu.jetbrains.dart-scripts</id>
+    <id>com.joutvhu.intellij.dart-scripts</id>
     <name>Dart Scripts Runner</name>
     <category>Other Tools</category>
     <vendor email="joutvhu@gmail.com" url="https://github.com/joutvhu">Giao Ho</vendor>

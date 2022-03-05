@@ -9,11 +9,13 @@ import java.io.Serializable;
 
 @UtilityClass
 public class DartIcons implements Serializable {
-    @NotNull
-    public final Icon ScriptIcon = load("icons/dartScript.svg", 9113565375246300682L, 0);
+    private static final long serialVersionUID = -7782889778971848655L;
 
     @NotNull
-    private Icon load(@NotNull String path, long cacheKey, int flags) {
-        return IconManager.getInstance().loadRasterizedIcon(path, DartIcons.class.getClassLoader(), cacheKey, flags);
+    public final Icon ScriptIcon = load("icons/dartScript.svg");
+
+    @NotNull
+    private Icon load(@NotNull String path) {
+        return IconManager.getInstance().getIcon(path, DartIcons.class);
     }
 }
