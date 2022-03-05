@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.joutvhu.jetbrains'
-version '1.211.0-beta.0'
+version '1.211.0'
 
 sourceCompatibility = 11
 
@@ -32,7 +32,6 @@ intellij {
 
 publishPlugin {
     token = project.intellijPublishToken
-    channels = ['beta']
 }
 
 test {
