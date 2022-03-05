@@ -1,7 +1,6 @@
-package com.joutvhu.jetbrains.dartscripts.action;
+package com.joutvhu.intellij.dartscripts.action;
 
 import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.lineMarker.LineMarkerActionWrapper;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -13,7 +12,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.UserDataHolderBase;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.joutvhu.jetbrains.dartscripts.run.PubspecTerminalHelper;
+import com.joutvhu.intellij.dartscripts.run.PubspecTerminalHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLFile;

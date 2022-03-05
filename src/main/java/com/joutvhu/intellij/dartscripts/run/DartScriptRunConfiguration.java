@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts.run;
+package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.execution.Executor;
 import com.intellij.execution.configuration.EnvironmentVariablesData;
@@ -15,7 +15,7 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizerUtil;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtilRt;
-import com.joutvhu.jetbrains.dartscripts.util.DartBundle;
+import com.joutvhu.intellij.dartscripts.util.DartBundle;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;

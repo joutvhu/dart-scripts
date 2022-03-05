@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts.run;
+package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.execution.configuration.EnvironmentVariablesComponent;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.RawCommandLineEditor;
 import com.intellij.ui.components.JBCheckBox;
-import com.joutvhu.jetbrains.dartscripts.util.DartBundle;
+import com.joutvhu.intellij.dartscripts.util.DartBundle;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

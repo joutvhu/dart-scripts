@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts.util;
+package com.joutvhu.intellij.dartscripts.util;
 
 import com.intellij.DynamicBundle;
 import org.jetbrains.annotations.Nls;

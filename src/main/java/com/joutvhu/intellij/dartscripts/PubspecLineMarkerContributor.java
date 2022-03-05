@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts;
+package com.joutvhu.intellij.dartscripts;
 
 import com.intellij.execution.lineMarker.RunLineMarkerContributor;
 import com.intellij.icons.AllIcons;
@@ -6,8 +6,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.joutvhu.jetbrains.dartscripts.action.PubspecRunScriptAction;
-import com.joutvhu.jetbrains.dartscripts.util.DartBundle;
+import com.joutvhu.intellij.dartscripts.action.PubspecRunScriptAction;
+import com.joutvhu.intellij.dartscripts.util.DartBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.yaml.YAMLTokenTypes;
 import org.jetbrains.yaml.psi.YAMLDocument;

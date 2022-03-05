@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts.run;
+package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;

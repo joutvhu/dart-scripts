@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts.run;
+package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.execution.configurations.ConfigurationTypeUtil;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -6,8 +6,8 @@ import com.intellij.execution.configurations.SimpleConfigurationType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.util.EnvironmentUtil;
-import com.joutvhu.jetbrains.dartscripts.util.DartBundle;
-import com.joutvhu.jetbrains.dartscripts.util.DartIcons;
+import com.joutvhu.intellij.dartscripts.util.DartBundle;
+import com.joutvhu.intellij.dartscripts.util.DartIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +19,7 @@ public class DartScriptConfigurationType extends SimpleConfigurationType {
         super(
                 ID, CONFIGURATION_NAME,
                 DartBundle.message("ds.run.configuration.description.0.configuration", CONFIGURATION_NAME),
-                NotNullLazyValue.lazy(() -> DartIcons.ScriptIcon)
+                NotNullLazyValue.createConstantValue(DartIcons.ScriptIcon)
         );
     }
 

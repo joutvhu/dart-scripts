@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts.run;
+package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.execution.DefaultExecutionResult;
 import com.intellij.execution.ExecutionException;
@@ -26,7 +26,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.BaseDataReader;
 import com.intellij.util.io.BaseOutputReader;
-import com.joutvhu.jetbrains.dartscripts.util.ShellStringUtil;
+import com.joutvhu.intellij.dartscripts.util.ShellStringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

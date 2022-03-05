@@ -1,4 +1,4 @@
-package com.joutvhu.jetbrains.dartscripts.util;
+package com.joutvhu.intellij.dartscripts.util;
 
 import com.intellij.openapi.util.text.StringUtil;
 import lombok.experimental.UtilityClass;
