@@ -1,0 +1,56 @@
+name: Publish Plugin to Jetbrains
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Write Gradle Properties File
+        uses: joutvhu/write-file@v1
+        with:
+          path: gradle.properties
+          contents: ${{ secrets.GRADLE_IDEA_PROPERTIES }}
+          write_mode: overwrite
+
+      - name: Get Current Release
+        id: current_release
+        uses: joutvhu/get-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build with Gradle
+        run: gradle clean buildPlugin
+
+#      - name: Publish Plugin to Jetbrains
+#          if: ${{ steps.current_release.outputs.prerelease == 'false' && steps.current_release.outputs.draft == 'false' }}
+#          run: gradle publishPlugin
+
+#      - name: Zip plugin
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: dart-scripts-${{ steps.current_release.outputs.tag_name }}
+#          path: /build/libs/**
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.current_release.outputs.upload_url }}
+          asset_path: /build/libs/**
