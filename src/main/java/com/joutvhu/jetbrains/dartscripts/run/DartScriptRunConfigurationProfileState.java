@@ -47,9 +47,9 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
     @Override
     public @Nullable ExecutionResult execute(Executor executor, @NotNull ProgramRunner<?> runner) throws ExecutionException {
         if (myRunConfiguration.isExecuteInTerminal()) {
-            DartScriptRunner shRunner = ApplicationManager.getApplication().getService(DartScriptRunner.class);
-            if (shRunner != null && shRunner.isAvailable(myProject)) {
-                shRunner.run(myProject, buildCommand(), myRunConfiguration.getScriptWorkingDirectory(), myRunConfiguration.getName(),
+            DartScriptRunner dsRunner = ApplicationManager.getApplication().getService(DartScriptRunner.class);
+            if (dsRunner != null && dsRunner.isAvailable(myProject)) {
+                dsRunner.run(myProject, buildCommand(), myRunConfiguration.getScriptWorkingDirectory(), myRunConfiguration.getName(),
                         isActivateToolWindow());
                 return null;
             }

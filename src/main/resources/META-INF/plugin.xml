@@ -30,7 +30,7 @@
         <applicationService serviceInterface="com.joutvhu.jetbrains.dartscripts.run.DartScriptRunner"
                             serviceImplementation="com.joutvhu.jetbrains.dartscripts.run.DartScriptTerminalRunner"/>
         <runLineMarkerContributor language="yaml"
-                implementationClass="com.joutvhu.jetbrains.dartscripts.PubspecLineMarkerProvider">
+                implementationClass="com.joutvhu.jetbrains.dartscripts.PubspecLineMarkerContributor">
         </runLineMarkerContributor>
     </extensions>
 

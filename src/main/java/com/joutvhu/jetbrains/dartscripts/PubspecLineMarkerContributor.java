@@ -16,7 +16,7 @@ import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YAMLScalar;
 import org.jetbrains.yaml.psi.impl.YAMLBlockMappingImpl;
 
-public class PubspecLineMarkerProvider extends RunLineMarkerContributor {
+public class PubspecLineMarkerContributor extends RunLineMarkerContributor {
     public static String SCRIPT_KEY = "scripts";
     public static String PUBSPEC_FILE = "pubspec.yaml";
 
