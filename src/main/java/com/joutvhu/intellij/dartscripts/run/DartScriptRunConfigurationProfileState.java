@@ -151,7 +151,7 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
                 quotedString = ShellStringUtil.quote(value);
             } else {
                 String escapedValue = StringUtil.escapeQuotes(value);
-                quotedString = StringUtil.containsWhitespaces(value) ? StringUtil.QUOTER.fun(escapedValue) : escapedValue;
+                quotedString = StringUtil.containsWhitespaces(value) ? StringUtil.QUOTER.apply(escapedValue) : escapedValue;
             }
             if (endWithSemicolon) {
                 String semicolon = "";
