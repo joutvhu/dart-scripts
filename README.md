@@ -1,7 +1,7 @@
 # Dart Scripts Runner
 
-![Downloads](https://img.shields.io/jetbrains/plugin/d/18725-dart-scripts-runner)
-![Version](https://img.shields.io/jetbrains/plugin/v/18725-dart-scripts-runner)
+![Downloads](https://img.shields.io/jetbrains/plugin/d/18726-dart-scripts-runner)
+![Version](https://img.shields.io/jetbrains/plugin/v/18726-dart-scripts-runner)
 
 IntelliJ plugin to run scripts on pubspec.yaml for Dart projects
 
