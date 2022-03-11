@@ -1,7 +1,6 @@
 package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.NlsContexts;
 import org.jetbrains.annotations.NotNull;
 
 public interface DartScriptRunner {
@@ -9,7 +8,7 @@ public interface DartScriptRunner {
             @NotNull Project project,
             @NotNull String command,
             @NotNull String workingDirectory,
-            @NotNull @NlsContexts.TabTitle String title,
+            @NotNull String title,
             boolean activateToolWindow
     );
 

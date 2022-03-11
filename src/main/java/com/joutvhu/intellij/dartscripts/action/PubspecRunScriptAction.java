@@ -2,19 +2,18 @@ package com.joutvhu.intellij.dartscripts.action;
 
 import com.intellij.execution.Executor;
 import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.NlsActions;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.UserDataHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider;
 import com.joutvhu.intellij.dartscripts.run.PubspecTerminalHelper;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.yaml.psi.YAMLFile;
@@ -26,8 +25,8 @@ public class PubspecRunScriptAction extends AnAction {
     public static final String ID = "runPubspecScriptAction";
 
     public PubspecRunScriptAction(
-            @Nullable @NlsActions.ActionText String text,
-            @Nullable @NlsActions.ActionDescription String description,
+            @Nullable @Nls(capitalization = Nls.Capitalization.Title) String text,
+            @Nullable @Nls(capitalization = Nls.Capitalization.Sentence) String description,
             @Nullable Icon icon
     ) {
         super(text, description, icon);
@@ -79,7 +78,9 @@ public class PubspecRunScriptAction extends AnAction {
     }
 
     @Override
-    public @Nullable @NlsActions.ActionText String getTemplateText() {
+    @Nullable
+    @Nls(capitalization = Nls.Capitalization.Title)
+    public String getTemplateText() {
         return super.getTemplateText();
     }
 }

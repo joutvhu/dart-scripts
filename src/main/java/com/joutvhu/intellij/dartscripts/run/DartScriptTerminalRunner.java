@@ -2,7 +2,6 @@ package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
@@ -27,7 +26,7 @@ public class DartScriptTerminalRunner implements DartScriptRunner {
             @NotNull Project project,
             @NotNull String command,
             @NotNull String workingDirectory,
-            @NotNull @NlsContexts.TabTitle String title,
+            @NotNull String title,
             boolean activateToolWindow
     ) {
         TerminalView terminalView = TerminalView.getInstance(project);

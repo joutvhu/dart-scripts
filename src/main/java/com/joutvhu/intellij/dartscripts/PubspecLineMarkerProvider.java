@@ -130,7 +130,7 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
         }
 
         @Override
-        public Icon getCommonIcon(@NotNull List<? extends MergeableLineMarkerInfo<?>> infos) {
+        public Icon getCommonIcon(@NotNull List<MergeableLineMarkerInfo> infos) {
             return getIcon();
         }
     }
