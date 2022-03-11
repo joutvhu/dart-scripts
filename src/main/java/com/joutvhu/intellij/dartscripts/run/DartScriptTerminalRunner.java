@@ -43,8 +43,7 @@ public class DartScriptTerminalRunner implements DartScriptRunner {
             if (pair == null) {
                 terminalView.createLocalShellWidget(
                         workingDirectory,
-                        title,
-                        activateToolWindow
+                        title
                 ).executeCommand(command);
                 return;
             }

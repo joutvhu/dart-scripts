@@ -36,11 +36,6 @@ public class DartScriptConfigurationType extends SimpleConfigurationType {
         return ConfigurationTypeUtil.findConfigurationType(DartScriptConfigurationType.class);
     }
 
-    @Override
-    public boolean isEditableInDumbMode() {
-        return true;
-    }
-
     public static @Nullable String getDefaultShell() {
         return EnvironmentUtil.getValue("SHELL");
     }
