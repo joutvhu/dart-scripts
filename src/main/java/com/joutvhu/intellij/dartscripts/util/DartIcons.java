@@ -12,7 +12,7 @@ public class DartIcons implements Serializable {
     private static final long serialVersionUID = -7782889778971848655L;
 
     @NotNull
-    public final Icon ScriptIcon = load("icons/dartScript.svg");
+    public final Icon ScriptIcon = load("/icons/dartScript.svg");
 
     @NotNull
     private Icon load(@NotNull String path) {

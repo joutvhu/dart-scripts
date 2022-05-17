@@ -30,9 +30,9 @@
         <configurationType implementation="com.joutvhu.intellij.dartscripts.run.DartScriptConfigurationType"/>
         <applicationService serviceInterface="com.joutvhu.intellij.dartscripts.run.DartScriptRunner"
                             serviceImplementation="com.joutvhu.intellij.dartscripts.run.DartScriptTerminalRunner"/>
-        <runLineMarkerContributor language="yaml"
-                implementationClass="com.joutvhu.intellij.dartscripts.PubspecLineMarkerContributor">
-        </runLineMarkerContributor>
+        <codeInsight.lineMarkerProvider language="yaml"
+                implementationClass="com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider">
+        </codeInsight.lineMarkerProvider>
     </extensions>
 
     <actions/>
