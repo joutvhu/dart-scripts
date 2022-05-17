@@ -3,7 +3,6 @@ package com.joutvhu.intellij.dartscripts;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.MergeableLineMarkerInfo;
 import com.intellij.codeInsight.intention.PriorityAction;
-import com.intellij.execution.ExecutorRegistryImpl;
 import com.intellij.execution.actions.RunContextAction;
 import com.intellij.execution.lineMarker.ExecutorAction;
 import com.intellij.execution.lineMarker.RunLineMarkerProvider;
@@ -151,8 +150,9 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
         @Override
         public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
             if (myOrigin instanceof ExecutorAction) {
-                if (((ExecutorAction)myOrigin).getOrigin() instanceof ExecutorRegistryImpl.ExecutorGroupActionGroup) {
-                    final AnAction[] children = ((ExecutorRegistryImpl.ExecutorGroupActionGroup)((ExecutorAction)myOrigin).getOrigin()).getChildren(null);
+                AnAction originAction = ((ExecutorAction) myOrigin).getOrigin();
+                if (originAction instanceof ActionGroup) {
+                    final AnAction[] children = ((ActionGroup) originAction).getChildren(null);
                     logger.assertTrue(ContainerUtil.all(Arrays.asList(children), o -> o instanceof RunContextAction));
                     return ContainerUtil.mapNotNull(children, o -> {
                         PsiElement element = myElement.getElement();
@@ -161,14 +161,14 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
                 }
             }
             if (myOrigin instanceof ActionGroup) {
-                return ((ActionGroup)myOrigin).getChildren(e == null ? null : wrapEvent(e));
+                return ((ActionGroup) myOrigin).getChildren(e == null ? null : wrapEvent(e));
             }
             return AnAction.EMPTY_ARRAY;
         }
 
         @Override
         public boolean canBePerformed(@NotNull DataContext context) {
-            return !(myOrigin instanceof ActionGroup) || ((ActionGroup)myOrigin).canBePerformed(wrapContext(context));
+            return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).canBePerformed(wrapContext(context));
         }
 
         @Override
@@ -178,17 +178,17 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
 
         @Override
         public boolean isPopup() {
-            return !(myOrigin instanceof ActionGroup) || ((ActionGroup)myOrigin).isPopup();
+            return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).isPopup();
         }
 
         @Override
         public boolean hideIfNoVisibleChildren() {
-            return myOrigin instanceof ActionGroup && ((ActionGroup)myOrigin).hideIfNoVisibleChildren();
+            return myOrigin instanceof ActionGroup && ((ActionGroup) myOrigin).hideIfNoVisibleChildren();
         }
 
         @Override
         public boolean disableIfNoVisibleChildren() {
-            return !(myOrigin instanceof ActionGroup) || ((ActionGroup)myOrigin).disableIfNoVisibleChildren();
+            return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).disableIfNoVisibleChildren();
         }
 
         @Override
@@ -214,7 +214,8 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
             PsiElement element = myElement.getElement();
             if (pair == null || pair.first != element) {
                 pair = Pair.pair(element, dataContext);
-                DataManager.getInstance().saveInDataContext(dataContext, PubspecLineMarkerProvider.LOCATION_WRAPPER, pair);
+                DataManager.getInstance()
+                        .saveInDataContext(dataContext, PubspecLineMarkerProvider.LOCATION_WRAPPER, pair);
             }
             return dataContext;
         }
