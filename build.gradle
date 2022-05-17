@@ -28,7 +28,6 @@ intellij {
             'org.jetbrains.plugins.terminal',
             'org.jetbrains.plugins.yaml'
     ]
-    buildSearchableOptions.enabled = false
 }
 
 publishPlugin {

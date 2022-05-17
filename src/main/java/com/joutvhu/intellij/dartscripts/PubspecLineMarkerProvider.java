@@ -79,12 +79,16 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
         AnAction action = new PubspecRunScriptAction(DartBundle.message("ds.action.name.run", scriptName), "", AllIcons.Actions.Execute);
         DefaultActionGroup actionGroup = new DefaultActionGroup();
         actionGroup.add(new LineMarkerActionWrapper(element, action));
-        return new RunLineMarkerInfo(element, AllIcons.Actions.Execute, psiElement -> "", actionGroup);
+        return new RunLineMarkerInfo(element, AllIcons.Actions.Execute, actionGroup);
     }
 
     public static class RunLineMarkerInfo extends MergeableLineMarkerInfo<PsiElement> {
         private final DefaultActionGroup myActionGroup;
         private final AnAction mySingleAction;
+
+        RunLineMarkerInfo(PsiElement element, Icon icon, DefaultActionGroup actionGroup) {
+            this(element, icon, psiElement -> "", actionGroup);
+        }
 
         RunLineMarkerInfo(PsiElement element, Icon icon, Function<? super PsiElement, @Nls String> tooltipProvider, DefaultActionGroup actionGroup) {
             super(element, element.getTextRange(), icon, tooltipProvider, null, GutterIconRenderer.Alignment.CENTER, () -> tooltipProvider.fun(element));
