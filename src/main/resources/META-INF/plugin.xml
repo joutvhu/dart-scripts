@@ -31,7 +31,7 @@
         <applicationService serviceInterface="com.joutvhu.intellij.dartscripts.run.DartScriptRunner"
                             serviceImplementation="com.joutvhu.intellij.dartscripts.run.DartScriptTerminalRunner"/>
         <codeInsight.lineMarkerProvider language="yaml"
-                implementationClass="com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider">
+                                        implementationClass="com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider">
         </codeInsight.lineMarkerProvider>
     </extensions>
 

@@ -40,8 +40,8 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
     @Override
     public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
         if (myOrigin instanceof ExecutorAction) {
-            if (((ExecutorAction)myOrigin).getOrigin() instanceof ExecutorRegistryImpl.ExecutorGroupActionGroup) {
-                final AnAction[] children = ((ExecutorRegistryImpl.ExecutorGroupActionGroup)((ExecutorAction)myOrigin).getOrigin()).getChildren(null);
+            if (((ExecutorAction) myOrigin).getOrigin() instanceof ExecutorRegistryImpl.ExecutorGroupActionGroup) {
+                final AnAction[] children = ((ExecutorRegistryImpl.ExecutorGroupActionGroup) ((ExecutorAction) myOrigin).getOrigin()).getChildren(null);
                 logger.assertTrue(ContainerUtil.all(Arrays.asList(children), o -> o instanceof RunContextAction));
                 return ContainerUtil.mapNotNull(children, o -> {
                     PsiElement element = myElement.getElement();
@@ -50,14 +50,14 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
             }
         }
         if (myOrigin instanceof ActionGroup) {
-            return ((ActionGroup)myOrigin).getChildren(e == null ? null : wrapEvent(e));
+            return ((ActionGroup) myOrigin).getChildren(e == null ? null : wrapEvent(e));
         }
         return AnAction.EMPTY_ARRAY;
     }
 
     @Override
     public boolean canBePerformed(@NotNull DataContext context) {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup)myOrigin).canBePerformed(wrapContext(context));
+        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).canBePerformed(wrapContext(context));
     }
 
     @Override
@@ -67,17 +67,17 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
 
     @Override
     public boolean isPopup() {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup)myOrigin).isPopup();
+        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).isPopup();
     }
 
     @Override
     public boolean hideIfNoVisibleChildren() {
-        return myOrigin instanceof ActionGroup && ((ActionGroup)myOrigin).hideIfNoVisibleChildren();
+        return myOrigin instanceof ActionGroup && ((ActionGroup) myOrigin).hideIfNoVisibleChildren();
     }
 
     @Override
     public boolean disableIfNoVisibleChildren() {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup)myOrigin).disableIfNoVisibleChildren();
+        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).disableIfNoVisibleChildren();
     }
 
     @Override
