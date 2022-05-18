@@ -36,6 +36,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DartScriptRunConfigurationProfileState implements RunProfileState {
+    public static final String SHELL_COMMAND_PATH = "/bin/sh";
+    public static final String COMMAND_LINE_ARGUMENT = "/c";
+
     private final Project myProject;
     private final DartScriptRunConfiguration myRunConfiguration;
 
@@ -114,12 +117,9 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
         String defaultShell = DartScriptConfigurationType.getDefaultShell();
         if (SystemInfo.isWindows) {
             commandLine.withExePath(ObjectUtils.notNull(defaultShell, ExecUtil.getWindowsShellName()));
-            commandLine.withParameters("/c");
-        } else if (SystemInfo.isMac) {
-            commandLine.withExePath(ObjectUtils.notNull(defaultShell, ExecUtil.getOpenCommandPath()));
-            commandLine.withParameters("-a");
+            commandLine.withParameters(COMMAND_LINE_ARGUMENT);
         } else {
-            commandLine.withExePath(ObjectUtils.notNull(defaultShell, "/bin/sh"));
+            commandLine.withExePath(ObjectUtils.notNull(defaultShell, SHELL_COMMAND_PATH));
             commandLine.withParameters(EnvironmentUtil.SHELL_COMMAND_ARGUMENT);
         }
         return commandLine;
