@@ -1,3 +1,31 @@
+## 1.221.1
+
+- Fix "No such file or directory" on MacOS
+
+## 1.213.2
+
+- Fix "No such file or directory" on MacOS
+
+## 1.212.2
+
+- Fix "No such file or directory" on MacOS
+
+## 1.211.2
+
+- Fix "No such file or directory" on MacOS
+
+## 1.203.1
+
+- Fix "No such file or directory" on MacOS
+
+## 1.202.1
+
+- Fix "No such file or directory" on MacOS
+
+## 1.201.1
+
+- Fix "No such file or directory" on MacOS
+
 ## 1.221.0
 
 - Support IDE version 2022.1
