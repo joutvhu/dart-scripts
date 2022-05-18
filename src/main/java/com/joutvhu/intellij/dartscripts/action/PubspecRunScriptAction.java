@@ -11,7 +11,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.UserDataHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider;
+import com.joutvhu.intellij.dartscripts.LineMarkerActionWrapper;
 import com.joutvhu.intellij.dartscripts.run.PubspecTerminalHelper;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -70,7 +70,7 @@ public class PubspecRunScriptAction extends AnAction {
         DataContext dataContext = e.getDataContext();
         if (dataContext instanceof UserDataHolder) {
             Pair<PsiElement, ?> pair = ((UserDataHolder) dataContext)
-                    .getUserData(PubspecLineMarkerProvider.LOCATION_WRAPPER);
+                    .getUserData(LineMarkerActionWrapper.LOCATION_WRAPPER);
             if (pair != null && pair.first instanceof YAMLKeyValue)
                 return (YAMLKeyValue) pair.first;
         }
