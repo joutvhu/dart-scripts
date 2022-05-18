@@ -52,11 +52,6 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
     }
 
     @Override
-    public boolean canBePerformed(@NotNull DataContext context) {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).canBePerformed(wrapContext(context));
-    }
-
-    @Override
     public boolean isDumbAware() {
         return myOrigin.isDumbAware();
     }
