@@ -4,15 +4,15 @@
 
 ## 1.213.1
 
-- Fix getUserData(PubspecLineMarkerProvider.LOCATION_WRAPPER) not found.
+- Fix UserDataHolderBase.getUserData(com.intellij.execution.lineMarker.LineMarkerActionWrapper.LOCATION_WRAPPER) not found.
 
 ## 1.212.1
 
-- Fix getUserData(PubspecLineMarkerProvider.LOCATION_WRAPPER) not found.
+- Fix UserDataHolderBase.getUserData(com.intellij.execution.lineMarker.LineMarkerActionWrapper.LOCATION_WRAPPER) not found.
 
 ## 1.211.1
 
-- Fix getUserData(PubspecLineMarkerProvider.LOCATION_WRAPPER) not found.
+- Fix UserDataHolderBase.getUserData(com.intellij.execution.lineMarker.LineMarkerActionWrapper.LOCATION_WRAPPER) not found.
 
 ## 1.213.0
 
