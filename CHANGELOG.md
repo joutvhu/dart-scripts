@@ -1,3 +1,7 @@
+## 1.221.0
+
+- Support IDE version 2022.1
+
 ## 1.213.1
 
 - Fix getUserData(PubspecLineMarkerProvider.LOCATION_WRAPPER) not found.
