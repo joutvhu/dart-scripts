@@ -33,6 +33,6 @@ public class ShellStringUtil {
 
     static {
         ENCODED = toStr(ORIGIN_CHARS, '\\');
-        ORIGINS = toStr(ORIGIN_CHARS, (Character)null);
+        ORIGINS = toStr(ORIGIN_CHARS, (Character) null);
     }
 }
