@@ -18,14 +18,17 @@ import org.jetbrains.yaml.psi.YAMLKeyValue;
 import org.jetbrains.yaml.psi.YAMLScalar;
 import org.jetbrains.yaml.psi.impl.YAMLBlockMappingImpl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
     public static final String SCRIPT_KEY = "scripts";
+    public static final String SCRIPT_TEXT_KEY = "script";
     public static final String PUBSPEC_FILE = "pubspec.yaml";
 
     @Override
     public LineMarkerInfo<?> getLineMarkerInfo(@NotNull PsiElement element) {
         if (element instanceof YAMLKeyValue &&
-                ((YAMLKeyValue) element).getValue() instanceof YAMLScalar &&
                 element.getParent() instanceof YAMLBlockMappingImpl &&
                 element.getParent().getParent() instanceof YAMLKeyValue) {
             YAMLKeyValue scriptsElement = (YAMLKeyValue) element.getParent().getParent();
@@ -38,7 +41,9 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
                     if (doc.getParent() instanceof YAMLFile) {
                         VirtualFile file = ((YAMLFile) doc.getParent()).getVirtualFile();
                         if (!file.isDirectory() && PUBSPEC_FILE.equals(file.getName())) {
-                            return createMarkerInfo((YAMLKeyValue) element);
+                            Map<String, String> params = getActionParams((YAMLKeyValue) element);
+                            if (params != null && params.containsKey(SCRIPT_TEXT_KEY))
+                                return createMarkerInfo((YAMLKeyValue) element);
                         }
                     }
                 }
@@ -53,5 +58,22 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
         DefaultActionGroup actionGroup = new DefaultActionGroup();
         actionGroup.add(new LineMarkerActionWrapper(element, action));
         return new RunLineMarkerInfo(element, AllIcons.Actions.Execute, psiElement -> "", actionGroup);
+    }
+
+    public static Map<String, String> getActionParams(YAMLKeyValue element) {
+        Map<String, String> params = new HashMap<>();
+        if (element.getValue() instanceof YAMLScalar) {
+            params.put(SCRIPT_TEXT_KEY, ((YAMLScalar) element.getValue()).getTextValue());
+            return params;
+        } else if (element.getValue() instanceof YAMLBlockMappingImpl) {
+            YAMLBlockMappingImpl childBlock = (YAMLBlockMappingImpl) element.getValue();
+            for (PsiElement child = childBlock.getFirstChild(); child != null; child = child.getNextSibling()) {
+                if (child instanceof YAMLKeyValue && ((YAMLKeyValue) child).getValue() instanceof YAMLScalar) {
+                    params.put(((YAMLKeyValue) child).getKeyText(), ((YAMLKeyValue) child).getValueText());
+                }
+            }
+            return params;
+        }
+        return null;
     }
 }
