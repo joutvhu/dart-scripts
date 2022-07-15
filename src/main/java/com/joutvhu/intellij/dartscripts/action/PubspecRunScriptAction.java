@@ -13,6 +13,7 @@ import com.intellij.openapi.util.UserDataHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.joutvhu.intellij.dartscripts.LineMarkerActionWrapper;
+import com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider;
 import com.joutvhu.intellij.dartscripts.run.PubspecTerminalHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +21,13 @@ import org.jetbrains.yaml.psi.YAMLFile;
 import org.jetbrains.yaml.psi.YAMLKeyValue;
 
 import javax.swing.*;
+import java.nio.file.Paths;
+import java.util.Map;
 
 public class PubspecRunScriptAction extends AnAction {
     public static final String ID = "runPubspecScriptAction";
+    public static final String DIRECTORY_KEY = "directory";
+    public static final String TERMINAL_KEY = "terminal";
 
     public PubspecRunScriptAction(
             @Nullable @NlsActions.ActionText String text,
@@ -38,12 +43,36 @@ public class PubspecRunScriptAction extends AnAction {
         PsiFile file = e.getData(CommonDataKeys.PSI_FILE);
         YAMLKeyValue element = getElement(e);
         if (project != null && file instanceof YAMLFile && element != null) {
-            PubspecTerminalHelper.runScript(
-                    this.getExecutor(),
-                    e.getData(CommonDataKeys.PROJECT),
-                    element.getKeyText(),
-                    element.getValueText(),
-                    file.getVirtualFile().getParent().getPath());
+            Map<String, String> params = PubspecLineMarkerProvider.getActionParams(element);
+            if (params != null) {
+                String scriptText = params.get(PubspecLineMarkerProvider.SCRIPT_TEXT_KEY);
+                if (scriptText != null) {
+                    String workingDirectory = file.getVirtualFile().getParent().getPath();
+                    if (params.containsKey(DIRECTORY_KEY)) {
+                        workingDirectory = Paths.get(workingDirectory)
+                                .resolve(params.get(DIRECTORY_KEY))
+                                .normalize()
+                                .toAbsolutePath()
+                                .toString();
+                    }
+                    Boolean executeInTerminal = null;
+                    if (params.containsKey(TERMINAL_KEY)) {
+                        String terminalOption = params.get(TERMINAL_KEY);
+                        if ("true".equalsIgnoreCase(terminalOption) || "yes".equalsIgnoreCase(terminalOption))
+                            executeInTerminal = true;
+                        if ("false".equalsIgnoreCase(terminalOption) || "no".equalsIgnoreCase(terminalOption))
+                            executeInTerminal = false;
+                    }
+
+                    PubspecTerminalHelper.runScript(
+                            this.getExecutor(),
+                            e.getData(CommonDataKeys.PROJECT),
+                            element.getKeyText(),
+                            scriptText,
+                            workingDirectory,
+                            executeInTerminal);
+                }
+            }
         }
     }
 
