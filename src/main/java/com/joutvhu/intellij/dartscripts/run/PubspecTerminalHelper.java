@@ -17,7 +17,8 @@ public class PubspecTerminalHelper {
             Project project,
             String name,
             String script,
-            String workingDirectory
+            String workingDirectory,
+            Boolean executeInTerminal
     ) {
         RunManager runManager = RunManager.getInstance(project);
         DartScriptConfigurationType configurationType = ConfigurationTypeUtil
@@ -33,7 +34,7 @@ public class PubspecTerminalHelper {
 
         DartScriptRunConfiguration runConfiguration = (DartScriptRunConfiguration) configurationSettings.getConfiguration();
         runConfiguration.setScriptText(script);
-        runConfiguration.setExecuteInTerminal(false);
+        runConfiguration.setExecuteInTerminal(Boolean.TRUE.equals(executeInTerminal));
         runConfiguration.setScriptWorkingDirectory(workingDirectory);
 
         ExecutionEnvironmentBuilder builder = ExecutionEnvironmentBuilder

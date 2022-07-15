@@ -15,3 +15,19 @@ Dart Scripts Runner will add a run button on each script line.
 Click that button to run the script.
 
 ![Edit run configuration](docs/images/dart-script-configuration.png)
+
+## Example
+
+```yaml
+scripts:
+  # Without options:
+  #   directory: <project directory>
+  #   terminal:  false
+  pub_get: flutter pub get
+
+  # With options
+  pod_install:
+    script: pod install   # Script text                        (required)
+    directory: ./ios      # Working directory                  (default: <project directory>)
+    terminal: true        # Should execute script in terminal? (default: false)
+```
