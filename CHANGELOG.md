@@ -1,3 +1,27 @@
+## 1.211.3
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+  ```yaml
+  scripts:
+    # With options
+    pod_install:
+      script: pod install   # Script text                        (required)
+      directory: ios        # Working directory                  (default: <project directory>)
+      terminal: true        # Should execute script in terminal? (default: false)
+  ```
+
+## 1.203.2
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.202.2
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.201.2
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
 ## 1.221.1
 
 - Fix "No such file or directory" on MacOS

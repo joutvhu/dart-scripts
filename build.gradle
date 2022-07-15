@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.joutvhu.jetbrains'
-version '1.211.2'
+version '1.211.3'
 
 sourceCompatibility = 11
 
