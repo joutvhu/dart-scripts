@@ -6,7 +6,7 @@
 
 IntelliJ plugin to run scripts on pubspec.yaml for Dart projects
 
-## Install
+## Installation
 
 Press `Ctrl+Alt+S` to open the IDE settings and select Plugins.
 
