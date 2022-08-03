@@ -28,8 +28,10 @@ public class RunLineMarkerInfo extends MergeableLineMarkerInfo<PsiElement> {
         myActionGroup = actionGroup;
         if (myActionGroup.getChildrenCount() == 1) {
             mySingleAction = myActionGroup.getChildActionsOrStubs()[0];
+            myActionGroup.setPopup(false);
         } else {
             mySingleAction = null;
+            myActionGroup.setPopup(true);
         }
     }
 
@@ -48,7 +50,7 @@ public class RunLineMarkerInfo extends MergeableLineMarkerInfo<PsiElement> {
 
             @Override
             public ActionGroup getPopupMenuActions() {
-                return myActionGroup;
+                return myActionGroup.isPopup() ? myActionGroup : null;
             }
         };
     }

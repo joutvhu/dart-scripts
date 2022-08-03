@@ -4,11 +4,7 @@ import com.intellij.codeInsight.intention.PriorityAction;
 import com.intellij.execution.actions.RunContextAction;
 import com.intellij.execution.lineMarker.ExecutorAction;
 import com.intellij.ide.DataManager;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.ActionWithDelegate;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
@@ -61,25 +57,21 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
     }
 
     @Override
-    public boolean isPopup() {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).isPopup();
-    }
-
-    @Override
-    public boolean hideIfNoVisibleChildren() {
-        return myOrigin instanceof ActionGroup && ((ActionGroup) myOrigin).hideIfNoVisibleChildren();
-    }
-
-    @Override
-    public boolean disableIfNoVisibleChildren() {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).disableIfNoVisibleChildren();
-    }
-
-    @Override
     public void update(@NotNull AnActionEvent e) {
         AnActionEvent wrapped = wrapEvent(e);
         myOrigin.update(wrapped);
-        Icon icon = wrapped.getPresentation().getIcon();
+        Presentation presentation = wrapped.getPresentation();
+        if (myOrigin instanceof ActionGroup) {
+            Presentation originPresentation = myOrigin.getTemplatePresentation();
+            presentation.setPerformGroup(originPresentation.isPerformGroup());
+            presentation.setPopupGroup(originPresentation.isPopupGroup());
+            presentation.setHideGroupIfEmpty(originPresentation.isHideGroupIfEmpty());
+        } else {
+            presentation.setPerformGroup(true);
+            presentation.setPopupGroup(true);
+            presentation.setHideGroupIfEmpty(true);
+        }
+        Icon icon = presentation.getIcon();
         if (icon != null) {
             getTemplatePresentation().setIcon(icon);
         }
