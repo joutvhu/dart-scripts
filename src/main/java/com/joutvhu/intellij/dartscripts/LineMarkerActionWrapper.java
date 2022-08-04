@@ -4,11 +4,7 @@ import com.intellij.codeInsight.intention.PriorityAction;
 import com.intellij.execution.actions.RunContextAction;
 import com.intellij.execution.lineMarker.ExecutorAction;
 import com.intellij.ide.DataManager;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.ActionWithDelegate;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
@@ -34,6 +30,23 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
         myElement = SmartPointerManager.createPointer(element);
         myOrigin = origin;
         copyFrom(origin);
+        Presentation presentation = getTemplatePresentation();
+        Presentation originPresentation = myOrigin.getTemplatePresentation();
+        if (!(myOrigin instanceof ActionGroup)) {
+            presentation.setPerformGroup(true);
+            presentation.setPopupGroup(true);
+            presentation.setHideGroupIfEmpty(originPresentation.isHideGroupIfEmpty());
+            presentation.setDisableGroupIfEmpty(originPresentation.isDisableGroupIfEmpty());
+        } else {
+            presentation.setPopupGroup(originPresentation.isPopupGroup());
+            presentation.setHideGroupIfEmpty(false);
+            presentation.setDisableGroupIfEmpty(false);
+        }
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return myOrigin.getActionUpdateThread();
     }
 
     @Override
@@ -61,34 +74,18 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
     }
 
     @Override
-    public boolean isPopup() {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).isPopup();
-    }
-
-    @Override
-    public boolean hideIfNoVisibleChildren() {
-        return myOrigin instanceof ActionGroup && ((ActionGroup) myOrigin).hideIfNoVisibleChildren();
-    }
-
-    @Override
-    public boolean disableIfNoVisibleChildren() {
-        return !(myOrigin instanceof ActionGroup) || ((ActionGroup) myOrigin).disableIfNoVisibleChildren();
-    }
-
-    @Override
     public void update(@NotNull AnActionEvent e) {
         AnActionEvent wrapped = wrapEvent(e);
         myOrigin.update(wrapped);
         Icon icon = wrapped.getPresentation().getIcon();
         if (icon != null) {
-            getTemplatePresentation().setIcon(icon);
+            e.getPresentation().setIcon(icon);
         }
     }
 
     @NotNull
-    protected AnActionEvent wrapEvent(@NotNull AnActionEvent e) {
-        DataContext dataContext = wrapContext(e.getDataContext());
-        return new AnActionEvent(e.getInputEvent(), dataContext, e.getPlace(), e.getPresentation(), e.getActionManager(), e.getModifiers());
+    private AnActionEvent wrapEvent(@NotNull AnActionEvent e) {
+        return e.withDataContext(wrapContext(e.getDataContext()));
     }
 
     @NotNull

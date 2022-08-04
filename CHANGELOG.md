@@ -1,3 +1,7 @@
+## 1.222.0
+
+- Support IDE version 2022.2
+
 ## 1.221.2
 
 - Support specify `workingDirectory` and `executeInTerminal` options.
