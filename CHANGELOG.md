@@ -1,4 +1,4 @@
-## 1.201.2
+## 1.221.2
 
 - Support specify `workingDirectory` and `executeInTerminal` options.
   ```yaml
@@ -6,9 +6,33 @@
     # With options
     pod_install:
       script: pod install   # Script text                        (required)
-      directory: ios      # Working directory                  (default: <project directory>)
+      directory: ios        # Working directory                  (default: <project directory>)
       terminal: true        # Should execute script in terminal? (default: false)
   ```
+
+## 1.213.3
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.212.3
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.211.3
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.203.2
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.202.2
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.201.2
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
 
 ## 1.221.1
 
