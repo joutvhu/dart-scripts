@@ -30,6 +30,23 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
         myElement = SmartPointerManager.createPointer(element);
         myOrigin = origin;
         copyFrom(origin);
+        Presentation presentation = getTemplatePresentation();
+        Presentation originPresentation = myOrigin.getTemplatePresentation();
+        if (!(myOrigin instanceof ActionGroup)) {
+            presentation.setPerformGroup(true);
+            presentation.setPopupGroup(true);
+            presentation.setHideGroupIfEmpty(originPresentation.isHideGroupIfEmpty());
+            presentation.setDisableGroupIfEmpty(originPresentation.isDisableGroupIfEmpty());
+        } else {
+            presentation.setPopupGroup(originPresentation.isPopupGroup());
+            presentation.setHideGroupIfEmpty(false);
+            presentation.setDisableGroupIfEmpty(false);
+        }
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return myOrigin.getActionUpdateThread();
     }
 
     @Override
@@ -60,27 +77,15 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
     public void update(@NotNull AnActionEvent e) {
         AnActionEvent wrapped = wrapEvent(e);
         myOrigin.update(wrapped);
-        Presentation presentation = wrapped.getPresentation();
-        if (myOrigin instanceof ActionGroup) {
-            Presentation originPresentation = myOrigin.getTemplatePresentation();
-            presentation.setPerformGroup(originPresentation.isPerformGroup());
-            presentation.setPopupGroup(originPresentation.isPopupGroup());
-            presentation.setHideGroupIfEmpty(originPresentation.isHideGroupIfEmpty());
-        } else {
-            presentation.setPerformGroup(true);
-            presentation.setPopupGroup(true);
-            presentation.setHideGroupIfEmpty(true);
-        }
-        Icon icon = presentation.getIcon();
+        Icon icon = wrapped.getPresentation().getIcon();
         if (icon != null) {
-            getTemplatePresentation().setIcon(icon);
+            e.getPresentation().setIcon(icon);
         }
     }
 
     @NotNull
-    protected AnActionEvent wrapEvent(@NotNull AnActionEvent e) {
-        DataContext dataContext = wrapContext(e.getDataContext());
-        return new AnActionEvent(e.getInputEvent(), dataContext, e.getPlace(), e.getPresentation(), e.getActionManager(), e.getModifiers());
+    private AnActionEvent wrapEvent(@NotNull AnActionEvent e) {
+        return e.withDataContext(wrapContext(e.getDataContext()));
     }
 
     @NotNull
