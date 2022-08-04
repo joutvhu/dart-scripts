@@ -1,4 +1,4 @@
-## 1.212.3
+## 1.221.2
 
 - Support specify `workingDirectory` and `executeInTerminal` options.
   ```yaml
@@ -9,6 +9,14 @@
       directory: ios        # Working directory                  (default: <project directory>)
       terminal: true        # Should execute script in terminal? (default: false)
   ```
+
+## 1.213.3
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
+
+## 1.212.3
+
+- Support specify `workingDirectory` and `executeInTerminal` options.
 
 ## 1.211.3
 
