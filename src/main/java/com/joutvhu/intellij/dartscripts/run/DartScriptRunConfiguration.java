@@ -20,7 +20,10 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serial;
+
 public class DartScriptRunConfiguration extends LocatableConfigurationBase {
+    @Serial
     private static final long serialVersionUID = 8860638547700631226L;
 
     @NonNls

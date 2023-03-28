@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.terminal.ShellTerminalWidget;
 import org.jetbrains.plugins.terminal.TerminalToolWindowFactory;
+import org.jetbrains.plugins.terminal.TerminalToolWindowManager;
 import org.jetbrains.plugins.terminal.TerminalView;
 import org.jetbrains.plugins.terminal.arrangement.TerminalWorkingDirectoryManager;
 
@@ -30,7 +31,7 @@ public class DartScriptTerminalRunner implements DartScriptRunner {
             @NotNull @NlsContexts.TabTitle String title,
             boolean activateToolWindow
     ) {
-        TerminalView terminalView = TerminalView.getInstance(project);
+        TerminalToolWindowManager terminalView = TerminalToolWindowManager.getInstance(project);
         ToolWindow window = ToolWindowManager.getInstance(project)
                 .getToolWindow(TerminalToolWindowFactory.TOOL_WINDOW_ID);
         if (window == null) {
@@ -87,13 +88,12 @@ public class DartScriptTerminalRunner implements DartScriptRunner {
             @NotNull Content content,
             @NotNull String workingDirectory
     ) {
-        JBTerminalWidget widget = TerminalView.getWidgetByContent(content);
-        if (!(widget instanceof ShellTerminalWidget))
+        JBTerminalWidget widget = TerminalToolWindowManager.getWidgetByContent(content);
+        if (!(widget instanceof ShellTerminalWidget shellTerminalWidget))
             return null;
-        ShellTerminalWidget shellTerminalWidget = (ShellTerminalWidget) widget;
         if (!shellTerminalWidget.getTypedShellCommand().isEmpty() || shellTerminalWidget.hasRunningCommands())
             return null;
-        String currentWorkingDirectory = TerminalWorkingDirectoryManager.getWorkingDirectory(shellTerminalWidget, null);
+        String currentWorkingDirectory = TerminalWorkingDirectoryManager.getWorkingDirectory(shellTerminalWidget.asNewWidget());
         if (currentWorkingDirectory == null || !currentWorkingDirectory.equals(workingDirectory))
             return null;
         return new Pair<>(content, shellTerminalWidget);
