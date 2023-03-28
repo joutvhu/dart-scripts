@@ -30,8 +30,7 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
     public LineMarkerInfo<?> getLineMarkerInfo(@NotNull PsiElement element) {
         if (element instanceof YAMLKeyValue &&
                 element.getParent() instanceof YAMLBlockMappingImpl &&
-                element.getParent().getParent() instanceof YAMLKeyValue) {
-            YAMLKeyValue scriptsElement = (YAMLKeyValue) element.getParent().getParent();
+                element.getParent().getParent() instanceof YAMLKeyValue scriptsElement) {
             if (scriptsElement.getFirstChild() instanceof LeafPsiElement &&
                     SCRIPT_KEY.equals(scriptsElement.getFirstChild().getText()) &&
                     YAMLTokenTypes.SCALAR_KEY.equals(((LeafPsiElement) scriptsElement.getFirstChild()).getElementType())) {

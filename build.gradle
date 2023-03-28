@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.joutvhu.jetbrains'
-version '1.223.0'
+version '1.231.0'
 
 sourceCompatibility = 17
 
@@ -23,7 +23,7 @@ dependencies {
 }
 
 intellij {
-    version = '2022.3'
+    version = '2023.1'
     plugins = [
             'org.jetbrains.plugins.terminal',
             'org.jetbrains.plugins.yaml'

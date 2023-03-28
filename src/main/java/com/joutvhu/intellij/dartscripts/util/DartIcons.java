@@ -5,10 +5,12 @@ import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 @UtilityClass
 public class DartIcons implements Serializable {
+    @Serial
     private static final long serialVersionUID = -7782889778971848655L;
 
     @NotNull
