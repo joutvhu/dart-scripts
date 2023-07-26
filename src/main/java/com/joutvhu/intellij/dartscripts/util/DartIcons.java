@@ -18,6 +18,6 @@ public class DartIcons implements Serializable {
 
     @NotNull
     private Icon load(@NotNull String path) {
-        return IconManager.getInstance().getIcon(path, DartIcons.class);
+        return IconManager.getInstance().getIcon(path, DartIcons.class.getClassLoader());
     }
 }
