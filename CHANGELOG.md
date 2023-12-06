@@ -1,3 +1,7 @@
+## 1.233.0
+
+- Support IDE version 2023.3
+
 ## 1.232.0
 
 - Support IDE version 2023.2
