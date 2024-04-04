@@ -14,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.terminal.ShellTerminalWidget;
 import org.jetbrains.plugins.terminal.TerminalToolWindowFactory;
 import org.jetbrains.plugins.terminal.TerminalToolWindowManager;
-import org.jetbrains.plugins.terminal.TerminalView;
 import org.jetbrains.plugins.terminal.arrangement.TerminalWorkingDirectoryManager;
 
 import java.io.IOException;
@@ -42,11 +41,12 @@ public class DartScriptTerminalRunner implements DartScriptRunner {
         Pair<Content, ShellTerminalWidget> pair = getSuitableProcess(contentManager, workingDirectory);
         try {
             if (pair == null) {
-                terminalView.createLocalShellWidget(
+                terminalView.createShellWidget(
                         workingDirectory,
                         title,
-                        activateToolWindow
-                ).executeCommand(command);
+                        activateToolWindow,
+                    true
+                ).sendCommandToExecute(command);
                 return;
             }
             if (activateToolWindow) {

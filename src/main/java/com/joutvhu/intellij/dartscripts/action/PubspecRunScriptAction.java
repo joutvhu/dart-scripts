@@ -105,9 +105,4 @@ public class PubspecRunScriptAction extends AnAction {
         }
         return null;
     }
-
-    @Override
-    public @Nullable @NlsActions.ActionText String getTemplateText() {
-        return super.getTemplateText();
-    }
 }
