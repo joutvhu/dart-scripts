@@ -28,21 +28,20 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
 
     @Override
     public LineMarkerInfo<?> getLineMarkerInfo(@NotNull PsiElement element) {
-        if (element instanceof YAMLKeyValue &&
-                element.getParent() instanceof YAMLBlockMappingImpl &&
-                element.getParent().getParent() instanceof YAMLKeyValue scriptsElement) {
-            if (scriptsElement.getFirstChild() instanceof LeafPsiElement &&
-                    SCRIPT_KEY.equals(scriptsElement.getFirstChild().getText()) &&
-                    YAMLTokenTypes.SCALAR_KEY.equals(((LeafPsiElement) scriptsElement.getFirstChild()).getElementType())) {
-                if (scriptsElement.getParent() != null && scriptsElement.getParent()
-                        .getParent() instanceof YAMLDocument) {
-                    YAMLDocument doc = (YAMLDocument) scriptsElement.getParent().getParent();
-                    if (doc.getParent() instanceof YAMLFile) {
-                        VirtualFile file = ((YAMLFile) doc.getParent()).getVirtualFile();
+        if (element instanceof YAMLKeyValue yamlKeyValue &&
+            element.getParent() instanceof YAMLBlockMappingImpl &&
+            element.getParent().getParent() instanceof YAMLKeyValue scriptsElement) {
+            if (scriptsElement.getFirstChild() instanceof LeafPsiElement leafPsiElement &&
+                SCRIPT_KEY.equals(scriptsElement.getFirstChild().getText()) &&
+                YAMLTokenTypes.SCALAR_KEY.equals(leafPsiElement.getElementType())) {
+                if (scriptsElement.getParent() != null &&
+                    scriptsElement.getParent().getParent() instanceof YAMLDocument yamlDocument) {
+                    if (yamlDocument.getParent() instanceof YAMLFile yamlFile) {
+                        VirtualFile file = yamlFile.getVirtualFile();
                         if (!file.isDirectory() && PUBSPEC_FILE.equals(file.getName())) {
-                            Map<String, String> params = getActionParams((YAMLKeyValue) element);
+                            Map<String, String> params = getActionParams(yamlKeyValue);
                             if (params != null && params.containsKey(SCRIPT_TEXT_KEY))
-                                return createMarkerInfo((YAMLKeyValue) element);
+                                return createMarkerInfo(yamlKeyValue);
                         }
                     }
                 }
@@ -61,14 +60,13 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
 
     public static Map<String, String> getActionParams(YAMLKeyValue element) {
         Map<String, String> params = new HashMap<>();
-        if (element.getValue() instanceof YAMLScalar) {
-            params.put(SCRIPT_TEXT_KEY, ((YAMLScalar) element.getValue()).getTextValue());
+        if (element.getValue() instanceof YAMLScalar yamlScalar) {
+            params.put(SCRIPT_TEXT_KEY, yamlScalar.getTextValue());
             return params;
-        } else if (element.getValue() instanceof YAMLBlockMappingImpl) {
-            YAMLBlockMappingImpl childBlock = (YAMLBlockMappingImpl) element.getValue();
-            for (PsiElement child = childBlock.getFirstChild(); child != null; child = child.getNextSibling()) {
-                if (child instanceof YAMLKeyValue && ((YAMLKeyValue) child).getValue() instanceof YAMLScalar) {
-                    params.put(((YAMLKeyValue) child).getKeyText(), ((YAMLKeyValue) child).getValueText());
+        } else if (element.getValue() instanceof YAMLBlockMappingImpl yamlBlockMapping) {
+            for (PsiElement child = yamlBlockMapping.getFirstChild(); child != null; child = child.getNextSibling()) {
+                if (child instanceof YAMLKeyValue yamlKeyValue && yamlKeyValue.getValue() instanceof YAMLScalar) {
+                    params.put(yamlKeyValue.getKeyText(),yamlKeyValue.getValueText());
                 }
             }
             return params;

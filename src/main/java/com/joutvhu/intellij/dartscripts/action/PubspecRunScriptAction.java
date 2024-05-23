@@ -97,9 +97,8 @@ public class PubspecRunScriptAction extends AnAction {
 
     private static YAMLKeyValue getElement(@NotNull AnActionEvent e) {
         DataContext dataContext = e.getDataContext();
-        if (dataContext instanceof UserDataHolder) {
-            Pair<PsiElement, ?> pair = ((UserDataHolder) dataContext)
-                    .getUserData(LineMarkerActionWrapper.LOCATION_WRAPPER);
+        if (dataContext instanceof UserDataHolder userDataHolder) {
+            Pair<PsiElement, ?> pair = userDataHolder.getUserData(LineMarkerActionWrapper.LOCATION_WRAPPER);
             if (pair != null && pair.first instanceof YAMLKeyValue)
                 return (YAMLKeyValue) pair.first;
         }
