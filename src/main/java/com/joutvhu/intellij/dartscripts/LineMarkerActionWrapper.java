@@ -1,7 +1,6 @@
 package com.joutvhu.intellij.dartscripts;
 
 import com.intellij.codeInsight.intention.PriorityAction;
-import com.intellij.execution.ExecutorRegistryImpl;
 import com.intellij.execution.actions.RunContextAction;
 import com.intellij.execution.lineMarker.ExecutorAction;
 import com.intellij.ide.DataManager;
@@ -63,7 +62,7 @@ public class LineMarkerActionWrapper extends ActionGroup implements PriorityActi
     public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
         if (myOrigin instanceof ExecutorAction executorAction) {
             AnAction originAction = executorAction.getOrigin();
-            if (originAction instanceof ExecutorRegistryImpl.ExecutorGroupActionGroup actionGroup) {
+            if (originAction instanceof ActionGroup actionGroup) {
                 final AnAction[] children = getChildren(actionGroup, null);
                 logger.assertTrue(ContainerUtil.all(Arrays.asList(children), RunContextAction.class::isInstance));
                 return ContainerUtil.mapNotNull(children, o -> {
