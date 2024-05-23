@@ -1,3 +1,7 @@
+## 1.241.1
+
+- Fix the `LineMarkerActionWrapper.getChildren(AnActionEvent)` method is marked with `@ApiStatus.OverrideOnly` annotation
+
 ## 1.241.0
 
 - Support IDE version 2024.1
