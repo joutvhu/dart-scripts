@@ -1,15 +1,19 @@
 plugins {
-    id 'org.jetbrains.intellij' version '1.17.4'
+    id 'org.jetbrains.intellij.platform' version '2.0.1'
     id 'java'
 }
 
 group 'com.joutvhu.jetbrains'
-version '1.241.1'
+version '1.242.0'
 
 sourceCompatibility = 17
 
 repositories {
     mavenCentral()
+
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 dependencies {
@@ -20,15 +24,22 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
     testCompileOnly 'org.projectlombok:lombok:1.18.34'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    intellijPlatform {
+        intellijIdeaCommunity('2024.2')
+
+        bundledPlugins(
+                'org.jetbrains.plugins.terminal',
+                'org.jetbrains.plugins.yaml')
+
+        pluginVerifier()
+        zipSigner()
+        instrumentationTools()
+    }
 }
 
-intellij {
-    version = '2024.1'
-    plugins = [
-            'org.jetbrains.plugins.terminal',
-            'org.jetbrains.plugins.yaml'
-    ]
-    buildSearchableOptions.enabled = false
+buildSearchableOptions {
+    enabled = false
 }
 
 publishPlugin {
