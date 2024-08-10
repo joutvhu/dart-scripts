@@ -183,6 +183,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# JetBrains plugin
+.intellijPlatform
+
 # Secrets
 gradle.properties
 secrets
