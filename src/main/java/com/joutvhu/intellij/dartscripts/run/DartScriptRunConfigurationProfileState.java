@@ -15,14 +15,13 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.ConsoleView;
-import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.sh.run.ShConfigurationType;
 import com.intellij.terminal.TerminalExecutionConsole;
 import com.intellij.util.EnvironmentUtil;
-import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.BaseDataReader;
 import com.intellij.util.io.BaseOutputReader;
@@ -36,9 +35,6 @@ import java.util.List;
 import java.util.Map;
 
 public class DartScriptRunConfigurationProfileState implements RunProfileState {
-    public static final String SHELL_COMMAND_PATH = "/bin/sh";
-    public static final String COMMAND_LINE_ARGUMENT = "/c";
-
     private final Project myProject;
     private final DartScriptRunConfiguration myRunConfiguration;
 
@@ -52,8 +48,12 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
         if (myRunConfiguration.isExecuteInTerminal()) {
             DartScriptRunner dsRunner = ApplicationManager.getApplication().getService(DartScriptRunner.class);
             if (dsRunner != null && dsRunner.isAvailable(myProject)) {
-                dsRunner.run(myProject, buildCommand(), myRunConfiguration.getScriptWorkingDirectory(), myRunConfiguration.getName(),
-                        isActivateToolWindow());
+                dsRunner.run(
+                    myProject,
+                    buildCommand(),
+                    myRunConfiguration.getScriptWorkingDirectory(),
+                    myRunConfiguration.getName(),
+                    isActivateToolWindow());
                 return null;
             }
         }
@@ -114,21 +114,15 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
     private PtyCommandLine getTerminalCommand() {
         PtyCommandLine commandLine = new PtyCommandLine();
         commandLine.setCharset(StandardCharsets.UTF_8);
-        String defaultShell = DartScriptConfigurationType.getDefaultShell();
-        if (SystemInfo.isWindows) {
-            commandLine.withExePath(ObjectUtils.notNull(defaultShell, ExecUtil.getWindowsShellName()));
-            commandLine.withParameters(COMMAND_LINE_ARGUMENT);
-        } else {
-            commandLine.withExePath(ObjectUtils.notNull(defaultShell, SHELL_COMMAND_PATH));
-            commandLine.withParameters(EnvironmentUtil.SHELL_COMMAND_ARGUMENT);
-        }
+        commandLine.withExePath(ShConfigurationType.getDefaultShell(this.myProject));
+        commandLine.withParameters(EnvironmentUtil.SHELL_COMMAND_ARGUMENT);
         return commandLine;
     }
 
     @NotNull
-    private String buildCommand() throws ExecutionException {
+    private String buildCommand() {
         List<String> commandLine = new ArrayList<>();
-        addIfPresent(commandLine, myRunConfiguration.getEnvData().getEnvs(), true);
+        addIfPresent(commandLine, myRunConfiguration.getEnvData().getEnvs());
         addIfPresent(commandLine, myRunConfiguration.getScriptText());
         return String.join(" ", commandLine);
     }
@@ -138,9 +132,8 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
     }
 
     private static void addIfPresent(
-            @NotNull List<String> commandLine,
-            @NotNull Map<String, String> envs,
-            boolean endWithSemicolon
+        @NotNull List<String> commandLine,
+        @NotNull Map<String, String> envs
     ) {
         int index = 0;
         for (Map.Entry<String, String> entry : envs.entrySet()) {
@@ -153,13 +146,9 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
                 String escapedValue = StringUtil.escapeQuotes(value);
                 quotedString = StringUtil.containsWhitespaces(value) ? StringUtil.QUOTER.apply(escapedValue) : escapedValue;
             }
-            if (endWithSemicolon) {
-                String semicolon = "";
-                if (index == envs.size() - 1) semicolon = ";";
-                commandLine.add("export " + key + "=" + quotedString + semicolon);
-            } else {
-                commandLine.add(key + "=" + quotedString);
-            }
+            String semicolon = "";
+            if (index == envs.size() - 1) semicolon = ";";
+            commandLine.add("export " + key + "=" + quotedString + semicolon);
             index++;
         }
     }
