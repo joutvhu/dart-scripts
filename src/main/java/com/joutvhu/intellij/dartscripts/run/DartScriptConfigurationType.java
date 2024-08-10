@@ -17,9 +17,9 @@ public class DartScriptConfigurationType extends SimpleConfigurationType {
 
     DartScriptConfigurationType() {
         super(
-                ID, CONFIGURATION_NAME,
-                DartBundle.message("ds.run.configuration.description.0.configuration", CONFIGURATION_NAME),
-                NotNullLazyValue.createConstantValue(DartIcons.ScriptIcon)
+            ID, CONFIGURATION_NAME,
+            DartBundle.message("ds.run.configuration.description.0.configuration", CONFIGURATION_NAME),
+            NotNullLazyValue.createConstantValue(DartIcons.ScriptIcon)
         );
     }
 

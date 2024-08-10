@@ -66,7 +66,7 @@ public class PubspecLineMarkerProvider extends RunLineMarkerProvider {
         } else if (element.getValue() instanceof YAMLBlockMappingImpl yamlBlockMapping) {
             for (PsiElement child = yamlBlockMapping.getFirstChild(); child != null; child = child.getNextSibling()) {
                 if (child instanceof YAMLKeyValue yamlKeyValue && yamlKeyValue.getValue() instanceof YAMLScalar) {
-                    params.put(yamlKeyValue.getKeyText(),yamlKeyValue.getValueText());
+                    params.put(yamlKeyValue.getKeyText(), yamlKeyValue.getValueText());
                 }
             }
             return params;
