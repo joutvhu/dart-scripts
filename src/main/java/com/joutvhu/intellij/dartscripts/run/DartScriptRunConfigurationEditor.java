@@ -21,9 +21,9 @@ public class DartScriptRunConfigurationEditor extends SettingsEditor<DartScriptR
 
     DartScriptRunConfigurationEditor(Project project) {
         myScriptWorkingDirectory.addBrowseFolderListener(
-                DartBundle.message("ds.label.choose.script.working.directory"),
-                "", project,
-                FileChooserDescriptorFactory.createSingleFolderDescriptor()
+            DartBundle.message("ds.label.choose.script.working.directory"),
+            "", project,
+            FileChooserDescriptorFactory.createSingleFolderDescriptor()
         );
     }
 

@@ -88,8 +88,8 @@ public class DartScriptRunConfiguration extends LocatableConfigurationBase {
 
     private static String readPathWithMetadata(@NotNull Element element, @NotNull String pathTag) {
         return Boolean.parseBoolean(JDOMExternalizerUtil.readField(element, TAG_PREFIX + pathTag))
-                ? readStringTagValue(element, pathTag)
-                : FileUtil.toSystemDependentName(readStringTagValue(element, pathTag));
+            ? readStringTagValue(element, pathTag)
+            : FileUtil.toSystemDependentName(readStringTagValue(element, pathTag));
     }
 
     @NotNull

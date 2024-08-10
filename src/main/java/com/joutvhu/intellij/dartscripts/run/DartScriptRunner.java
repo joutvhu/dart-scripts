@@ -6,11 +6,11 @@ import org.jetbrains.annotations.NotNull;
 
 public interface DartScriptRunner {
     void run(
-            @NotNull Project project,
-            @NotNull String command,
-            @NotNull String workingDirectory,
-            @NotNull @NlsContexts.TabTitle String title,
-            boolean activateToolWindow
+        @NotNull Project project,
+        @NotNull String command,
+        @NotNull String workingDirectory,
+        @NotNull @NlsContexts.TabTitle String title,
+        boolean activateToolWindow
     );
 
     boolean isAvailable(@NotNull Project project);

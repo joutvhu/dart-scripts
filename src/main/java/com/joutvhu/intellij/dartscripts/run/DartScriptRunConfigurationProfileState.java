@@ -131,10 +131,7 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
         ContainerUtil.addIfNotNull(commandLine, StringUtil.nullize(options));
     }
 
-    private static void addIfPresent(
-        @NotNull List<String> commandLine,
-        @NotNull Map<String, String> envs
-    ) {
+    private static void addIfPresent(@NotNull List<String> commandLine, @NotNull Map<String, String> envs) {
         int index = 0;
         for (Map.Entry<String, String> entry : envs.entrySet()) {
             String key = entry.getKey();

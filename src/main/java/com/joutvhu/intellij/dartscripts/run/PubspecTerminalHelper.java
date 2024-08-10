@@ -13,19 +13,19 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PubspecTerminalHelper {
     public RunConfiguration runScript(
-            Executor executor,
-            Project project,
-            String name,
-            String script,
-            String workingDirectory,
-            Boolean executeInTerminal
+        Executor executor,
+        Project project,
+        String name,
+        String script,
+        String workingDirectory,
+        Boolean executeInTerminal
     ) {
         RunManager runManager = RunManager.getInstance(project);
         DartScriptConfigurationType configurationType = ConfigurationTypeUtil
-                .findConfigurationType(DartScriptConfigurationType.class);
+            .findConfigurationType(DartScriptConfigurationType.class);
 
         RunnerAndConfigurationSettings configurationSettings = runManager
-                .findConfigurationByTypeAndName(configurationType, name);
+            .findConfigurationByTypeAndName(configurationType, name);
         if (configurationSettings == null) {
             configurationSettings = runManager.createConfiguration(name, configurationType);
             runManager.addConfiguration(configurationSettings);
@@ -38,7 +38,7 @@ public class PubspecTerminalHelper {
         runConfiguration.setScriptWorkingDirectory(workingDirectory);
 
         ExecutionEnvironmentBuilder builder = ExecutionEnvironmentBuilder
-                .createOrNull(executor, runConfiguration);
+            .createOrNull(executor, runConfiguration);
         if (builder != null)
             ExecutionManager.getInstance(project).restartRunProfile(builder.build());
 

@@ -30,9 +30,9 @@ public class PubspecRunScriptAction extends AnAction {
     public static final String TERMINAL_KEY = "terminal";
 
     public PubspecRunScriptAction(
-            @Nullable @NlsActions.ActionText String text,
-            @Nullable @NlsActions.ActionDescription String description,
-            @Nullable Icon icon
+        @Nullable @NlsActions.ActionText String text,
+        @Nullable @NlsActions.ActionDescription String description,
+        @Nullable Icon icon
     ) {
         super(text, description, icon);
     }
@@ -50,10 +50,10 @@ public class PubspecRunScriptAction extends AnAction {
                     String workingDirectory = file.getVirtualFile().getParent().getPath();
                     if (params.containsKey(DIRECTORY_KEY)) {
                         workingDirectory = Paths.get(workingDirectory)
-                                .resolve(params.get(DIRECTORY_KEY))
-                                .normalize()
-                                .toAbsolutePath()
-                                .toString();
+                            .resolve(params.get(DIRECTORY_KEY))
+                            .normalize()
+                            .toAbsolutePath()
+                            .toString();
                     }
                     Boolean executeInTerminal = null;
                     if (params.containsKey(TERMINAL_KEY)) {
@@ -65,12 +65,12 @@ public class PubspecRunScriptAction extends AnAction {
                     }
 
                     PubspecTerminalHelper.runScript(
-                            this.getExecutor(),
-                            e.getData(CommonDataKeys.PROJECT),
-                            element.getKeyText(),
-                            scriptText,
-                            workingDirectory,
-                            executeInTerminal);
+                        this.getExecutor(),
+                        e.getData(CommonDataKeys.PROJECT),
+                        element.getKeyText(),
+                        scriptText,
+                        workingDirectory,
+                        executeInTerminal);
                 }
             }
         }

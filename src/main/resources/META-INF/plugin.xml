@@ -1,39 +1,39 @@
 <idea-plugin>
-    <id>com.joutvhu.intellij.dart-scripts</id>
-    <name>Dart Scripts Runner</name>
-    <category>Other Tools</category>
-    <vendor email="joutvhu@gmail.com" url="https://github.com/joutvhu">Giao Ho</vendor>
+  <id>com.joutvhu.intellij.dart-scripts</id>
+  <name>Dart Scripts Runner</name>
+  <category>Other Tools</category>
+  <vendor email="joutvhu@gmail.com" url="https://github.com/joutvhu">Giao Ho</vendor>
 
-    <description>
-        <![CDATA[
-        <p>Support to run scripts in <b>pubspec.yaml</b> file with just one click.</p>
-        <br>
-        <img src="https://github.com/joutvhu/dart-scripts/raw/main/docs/images/pubspec-scripts-running.png" alt="Run script on pubspec.yaml" style="max-width: 100%;">
-        ]]>
-    </description>
+  <description>
+    <![CDATA[
+      <p>Support to run scripts in <b>pubspec.yaml</b> file with just one click.</p>
+      <br>
+      <img src="https://github.com/joutvhu/dart-scripts/raw/main/docs/images/pubspec-scripts-running.png" alt="Run script on pubspec.yaml" style="max-width: 100%;">
+    ]]>
+  </description>
 
-    <change-notes>
-        <![CDATA[
-        <a href="https://github.com/joutvhu/dart-scripts/blob/master/CHANGELOG.md">Changelog</a><br/>
-        <a href="https://github.com/joutvhu/dart-scripts/blob/master/README.md">Readme</a><br/>
-        <a href="https://github.com/joutvhu/dart-scripts/blob/master/LICENSE">License</a><br/>
-        ]]>
-    </change-notes>
+  <change-notes>
+    <![CDATA[
+      <a href="https://github.com/joutvhu/dart-scripts/blob/master/CHANGELOG.md">Changelog</a><br/>
+      <a href="https://github.com/joutvhu/dart-scripts/blob/master/README.md">Readme</a><br/>
+      <a href="https://github.com/joutvhu/dart-scripts/blob/master/LICENSE">License</a><br/>
+    ]]>
+  </change-notes>
 
-    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
-         on how to target different products -->
-    <depends>com.intellij.modules.platform</depends>
-    <depends>org.jetbrains.plugins.terminal</depends>
-    <depends>org.jetbrains.plugins.yaml</depends>
+  <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+  <depends>org.jetbrains.plugins.terminal</depends>
+  <depends>org.jetbrains.plugins.yaml</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <configurationType implementation="com.joutvhu.intellij.dartscripts.run.DartScriptConfigurationType"/>
-        <applicationService serviceInterface="com.joutvhu.intellij.dartscripts.run.DartScriptRunner"
-                            serviceImplementation="com.joutvhu.intellij.dartscripts.run.DartScriptTerminalRunner"/>
-        <codeInsight.lineMarkerProvider language="yaml"
-                                        implementationClass="com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider">
-        </codeInsight.lineMarkerProvider>
-    </extensions>
+  <extensions defaultExtensionNs="com.intellij">
+    <configurationType implementation="com.joutvhu.intellij.dartscripts.run.DartScriptConfigurationType"/>
+    <applicationService serviceInterface="com.joutvhu.intellij.dartscripts.run.DartScriptRunner"
+                        serviceImplementation="com.joutvhu.intellij.dartscripts.run.DartScriptTerminalRunner"/>
+    <codeInsight.lineMarkerProvider language="yaml"
+                                    implementationClass="com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider">
+    </codeInsight.lineMarkerProvider>
+  </extensions>
 
-    <actions/>
+  <actions/>
 </idea-plugin>
