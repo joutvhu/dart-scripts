@@ -1,6 +1,7 @@
 package com.joutvhu.intellij.dartscripts.run;
 
 import com.intellij.execution.configuration.EnvironmentVariablesComponent;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
@@ -20,11 +21,9 @@ public class DartScriptRunConfigurationEditor extends SettingsEditor<DartScriptR
     private EnvironmentVariablesComponent myScriptEnvComponent;
 
     DartScriptRunConfigurationEditor(Project project) {
-        myScriptWorkingDirectory.addBrowseFolderListener(
-            DartBundle.message("ds.label.choose.script.working.directory"),
-            "", project,
-            FileChooserDescriptorFactory.createSingleFolderDescriptor()
-        );
+        FileChooserDescriptor fileChooserDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+        myScriptWorkingDirectory.addBrowseFolderListener(project, fileChooserDescriptor
+            .withTitle(DartBundle.message("ds.label.choose.script.working.directory")).withDescription(""));
     }
 
     @Override
