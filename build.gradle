@@ -1,10 +1,10 @@
 plugins {
-    id 'org.jetbrains.intellij.platform' version '2.4.0'
+    id 'org.jetbrains.intellij.platform' version '2.5.0'
     id 'java'
 }
 
 group 'com.joutvhu.jetbrains'
-version '1.243.0'
+version '1.251.0'
 
 sourceCompatibility = 17
 
@@ -17,20 +17,22 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.36'
-    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.12.1'
-    testCompileOnly 'org.projectlombok:lombok:1.18.36'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.12.2'
+    testCompileOnly 'org.projectlombok:lombok:1.18.38'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
 
     intellijPlatform {
-        intellijIdeaCommunity('2024.3')
+        intellijIdeaCommunity('2025.1')
 
         bundledPlugins(
+                'com.jetbrains.sh',
                 'org.jetbrains.plugins.terminal',
-                'org.jetbrains.plugins.yaml')
+                'org.jetbrains.plugins.yaml'
+        )
 
         pluginVerifier()
         zipSigner()
