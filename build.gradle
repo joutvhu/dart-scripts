@@ -6,7 +6,7 @@ plugins {
 group 'com.joutvhu.jetbrains'
 version '1.243.0'
 
-sourceCompatibility = 17
+sourceCompatibility = 21
 
 repositories {
     mavenCentral()
