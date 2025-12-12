@@ -35,11 +35,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build with Gradle
-        run: gradle clean buildPlugin
+        run: ./gradlew clean buildPlugin
 
       - name: Publish Plugin to Jetbrains
         if: ${{ steps.current_release.outputs.draft == 'false' }}
-        run: gradle publishPlugin
+        run: ./gradlew publishPlugin
 
       - name: Get Plugin File
         id: get_file
