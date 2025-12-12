@@ -21,7 +21,6 @@ import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.sh.run.ShConfigurationType;
 import com.intellij.terminal.TerminalExecutionConsole;
-import com.intellij.util.EnvironmentUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.BaseDataReader;
 import com.intellij.util.io.BaseOutputReader;
@@ -35,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DartScriptRunConfigurationProfileState implements RunProfileState {
+    public static final String SHELL_COMMAND_ARGUMENT = "-c";
+
     private final Project myProject;
     private final DartScriptRunConfiguration myRunConfiguration;
 
@@ -115,7 +116,7 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
         PtyCommandLine commandLine = new PtyCommandLine();
         commandLine.setCharset(StandardCharsets.UTF_8);
         commandLine.withExePath(ShConfigurationType.getDefaultShell(this.myProject));
-        commandLine.withParameters(EnvironmentUtil.SHELL_COMMAND_ARGUMENT);
+        commandLine.withParameters(SHELL_COMMAND_ARGUMENT);
         return commandLine;
     }
 

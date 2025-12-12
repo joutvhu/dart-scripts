@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.joutvhu.jetbrains'
-version '1.252.0'
+version '1.253.0'
 
 sourceCompatibility = 21
 
@@ -26,7 +26,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 
     intellijPlatform {
-        intellijIdeaCommunity('2025.2')
+        intellijIdea('2025.3')
 
         bundledPlugins(
                 'com.jetbrains.sh',

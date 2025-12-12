@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 
-public class DartScriptRunConfiguration extends LocatableConfigurationBase {
+public class DartScriptRunConfiguration extends LocatableConfigurationBase<Element> {
     @Serial
     private static final long serialVersionUID = 8860638547700631226L;
 
@@ -66,7 +66,7 @@ public class DartScriptRunConfiguration extends LocatableConfigurationBase {
     public void writeExternal(@NotNull Element element) {
         super.writeExternal(element);
         JDOMExternalizerUtil.writeField(element, SCRIPT_TEXT_TAG, myScriptText);
-        writePathWithMetadata(element, myScriptWorkingDirectory, SCRIPT_WORKING_DIRECTORY_TAG);
+        writePathWithMetadata(element, myScriptWorkingDirectory);
         JDOMExternalizerUtil.writeField(element, EXECUTE_IN_TERMINAL_TAG, String.valueOf(myExecuteInTerminal));
         myEnvData.writeExternal(element);
     }
@@ -75,21 +75,21 @@ public class DartScriptRunConfiguration extends LocatableConfigurationBase {
     public void readExternal(@NotNull Element element) throws InvalidDataException {
         super.readExternal(element);
         myScriptText = readStringTagValue(element, SCRIPT_TEXT_TAG);
-        myScriptWorkingDirectory = readPathWithMetadata(element, SCRIPT_WORKING_DIRECTORY_TAG);
+        myScriptWorkingDirectory = readPathWithMetadata(element);
         myExecuteInTerminal = Boolean.parseBoolean(JDOMExternalizerUtil.readField(element, EXECUTE_IN_TERMINAL_TAG, Boolean.TRUE.toString()));
         myEnvData = EnvironmentVariablesData.readExternal(element);
     }
 
-    private static void writePathWithMetadata(@NotNull Element element, @NotNull String path, @NotNull String pathTag) {
+    private static void writePathWithMetadata(@NotNull Element element, @NotNull String path) {
         String systemIndependentPath = FileUtil.toSystemIndependentName(path);
-        JDOMExternalizerUtil.writeField(element, TAG_PREFIX + pathTag, Boolean.toString(systemIndependentPath.equals(path)));
-        JDOMExternalizerUtil.writeField(element, pathTag, systemIndependentPath);
+        JDOMExternalizerUtil.writeField(element, TAG_PREFIX + SCRIPT_WORKING_DIRECTORY_TAG, Boolean.toString(systemIndependentPath.equals(path)));
+        JDOMExternalizerUtil.writeField(element, SCRIPT_WORKING_DIRECTORY_TAG, systemIndependentPath);
     }
 
-    private static String readPathWithMetadata(@NotNull Element element, @NotNull String pathTag) {
-        return Boolean.parseBoolean(JDOMExternalizerUtil.readField(element, TAG_PREFIX + pathTag))
-            ? readStringTagValue(element, pathTag)
-            : FileUtil.toSystemDependentName(readStringTagValue(element, pathTag));
+    private static String readPathWithMetadata(@NotNull Element element) {
+        return Boolean.parseBoolean(JDOMExternalizerUtil.readField(element, TAG_PREFIX + SCRIPT_WORKING_DIRECTORY_TAG))
+            ? readStringTagValue(element, SCRIPT_WORKING_DIRECTORY_TAG)
+            : FileUtil.toSystemDependentName(readStringTagValue(element, SCRIPT_WORKING_DIRECTORY_TAG));
     }
 
     @NotNull
