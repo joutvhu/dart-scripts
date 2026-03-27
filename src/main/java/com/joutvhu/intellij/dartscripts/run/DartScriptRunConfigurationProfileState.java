@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.sh.run.ShConfigurationType;
+import com.intellij.sh.run.ShRunner;
 import com.intellij.terminal.TerminalExecutionConsoleBuilder;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.BaseDataReader;
@@ -47,7 +48,7 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
     @Override
     public @Nullable ExecutionResult execute(Executor executor, @NotNull ProgramRunner<?> runner) throws ExecutionException {
         if (myRunConfiguration.isExecuteInTerminal()) {
-            DartScriptRunner dsRunner = ApplicationManager.getApplication().getService(DartScriptRunner.class);
+            ShRunner dsRunner = ApplicationManager.getApplication().getService(ShRunner.class);
             if (dsRunner != null && dsRunner.isAvailable(myProject)) {
                 dsRunner.run(
                     myProject,

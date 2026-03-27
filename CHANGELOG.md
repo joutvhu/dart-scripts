@@ -1,6 +1,8 @@
 ## 1.261.0
 
 - Support IDE version 2026.1
+- Fix deprecated constructor TerminalExecutionConsole.<init>(...)
+- Fix deprecated method TerminalToolWindowManager.createShellWidget(...)
 
 ## 1.253.0
 

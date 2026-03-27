@@ -28,8 +28,6 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <configurationType implementation="com.joutvhu.intellij.dartscripts.run.DartScriptConfigurationType"/>
-    <applicationService serviceInterface="com.joutvhu.intellij.dartscripts.run.DartScriptRunner"
-                        serviceImplementation="com.joutvhu.intellij.dartscripts.run.DartScriptTerminalRunner"/>
     <codeInsight.lineMarkerProvider language="yaml"
                                     implementationClass="com.joutvhu.intellij.dartscripts.PubspecLineMarkerProvider">
     </codeInsight.lineMarkerProvider>
