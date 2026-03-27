@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.sh.run.ShConfigurationType;
-import com.intellij.terminal.TerminalExecutionConsole;
+import com.intellij.terminal.TerminalExecutionConsoleBuilder;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.io.BaseDataReader;
 import com.intellij.util.io.BaseOutputReader;
@@ -70,7 +70,7 @@ public class DartScriptRunConfigurationProfileState implements RunProfileState {
         GeneralCommandLine commandLine = createCommandLineForScript();
         ProcessHandler processHandler = createProcessHandler(commandLine);
         ProcessTerminatedListener.attach(processHandler);
-        ConsoleView console = new TerminalExecutionConsole(myProject, processHandler);
+        ConsoleView console = new TerminalExecutionConsoleBuilder(myProject).build();
         console.attachToProcess(processHandler);
         return new DefaultExecutionResult(console, processHandler);
     }
