@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij.platform' version '2.16.0'
+    id 'org.jetbrains.intellij.platform' version '2.18.1'
 }
 
 group 'com.joutvhu.jetbrains'
-version '1.261.0'
+version '1.262.0'
 
 repositories {
     mavenCentral()
@@ -18,13 +18,13 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.46'
     annotationProcessor 'org.projectlombok:lombok:1.18.46'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.1.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.1.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.1.2'
     testCompileOnly 'org.projectlombok:lombok:1.18.46'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.46'
 
     intellijPlatform {
-        intellijIdea('2026.1')
+        intellijIdea('2026.2')
 
         bundledPlugins(
                 'com.jetbrains.sh',
