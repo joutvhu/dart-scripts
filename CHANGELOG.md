@@ -1,3 +1,7 @@
+## 1.262.0
+
+- Support IDE version 2026.2
+
 ## 1.261.0
 
 - Support IDE version 2026.1
