@@ -1,3 +1,8 @@
+## 1.263.0
+
+- Support IDE version 2026.3
+- Update Gradle wrapper and dependencies
+
 ## 1.262.0
 
 - Support IDE version 2026.2
